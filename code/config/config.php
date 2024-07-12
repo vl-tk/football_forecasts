@@ -32,7 +32,7 @@ define('NAME_BOT_USER_ID', 7);
 
 define('MAX_GROUPS_TO_OWN', 5);
 
-define('HOST', 'db');
+define('HOST', 'mysql');
 define('DB', 'main');
 define('USERNAME', 'main');
 define('PW', '8f147a9619094d86');
