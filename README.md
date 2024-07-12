@@ -1,4 +1,4 @@
-# SIMPLE FORECAST SERVICE FOR FOOTBALL CHAMPIONSHIPS
+# SIMPLE FORECAST SERVICE FOR FOOTBALL TOURNAMENTS
 
 Bootstrap v2.3.2
 JQuery
@@ -23,12 +23,11 @@ publish it for anyone interested.
 
 Tournament games should be added before the tournament in the database.
 
-### TODO AND IDEAS
+### adminer
 
-итоги по турам
-силы команд и боты
-плюшки?
-часовой пояс
+http://localhost:8081/?server=mysql&username=main&db=main
+
+### TODO AND IDEAS
 
 удаление членов группы админом
 удаление себя из группы если не овнер

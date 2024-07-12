@@ -188,13 +188,13 @@ class User
 
 		if (strlen($login) <= 0)
 		{
-			$error[] = "Не указан логин";
+			$error[] = "No login specified";
 			return $error;
 		}
 
 		if (!preg_match('/^[a-z0-9_]{3,16}$/', $login))
 		{
-			$error[] = "Логин должен состоять из символов a-z 0-9 _ и быть длиной 3-8 символов";
+			$error[] = "The login must consist of the characters a-z 0-9 _ and be 3-8 characters long";
 			return $error;
 		}
 
@@ -202,19 +202,19 @@ class User
 
 		if (count($users) > 0)
 		{
-			$error[] = "Данный логин уже занят. Придумайте другой.";
+			$error[] = "This login is busy. Use another.";
 			return $error;
 		}
 
 		if (strlen($password) <= 5)
 		{
-			$error[] = "Пароль слишком короткий";
+			$error[] = "Password is too short";
 			return $error;
 		}
 
 		if (trim($password) != trim($password2))
 		{
-			$error[] = "Пароли не совпадают";
+			$error[] = "Passwords don't match";
 			return $error;
 		}
 
@@ -224,7 +224,7 @@ class User
 		if (count($groups) >= MAX_GROUPS_TO_OWN)
 			return array(
 				'status'=>'error',
-				'error'=>'Нельзя создать больше '.MAX_GROUPS_TO_OWN.' групп'
+				'error'=>'You cant create more than '.MAX_GROUPS_TO_OWN.' groups'
 			);
 		*/
 
@@ -299,23 +299,23 @@ class User
 					if ($remember === 'yes')
 						setcookie('sessid', $user['login'].','.md5($user['login'].WHATEVER), time() + 60*60*24*30*60);
 
-					Log::write('Авторизация успешна: Пользователь '.$this->login);
+					Log::write('Authorization successful: User '.$this->login);
 
 					return $this->id;
 				}
 				else
 				{
-					$error[] = "Неверный пароль";
+					$error[] = "Wrong password";
 					return $error;
 				}
 			}
 
-			$error[] = "Пользователь не найден";
+			$error[] = "User not found";
 			return $error;
 		}
 		else
 		{
-			$error[] = "Не указан логин или пароль";
+			$error[] = "No login or password";
 			return $error;
 		}
 	}

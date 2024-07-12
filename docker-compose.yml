@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+
   web:
     build:
       context: .
@@ -10,15 +11,31 @@ services:
     volumes:
       - ./code:/var/www/html
     depends_on:
-      - db
+      - mysql
 
-  db:
+  mysql:
     image: mysql:5.7
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: 8f147a9619094d86
       MYSQL_DATABASE: main
       MYSQL_USER: main
       MYSQL_PASSWORD: 8f147a9619094d86
     volumes:
-      - ./data:/var/lib/mysql
+      - mysql:/var/lib/mysql
       - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    ports:
+      - 3306:3306
+      # - 33060:33060
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+    depends_on:
+      - mysql
+
+volumes:
+  mysql:
