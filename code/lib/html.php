@@ -13,14 +13,14 @@ class Html
 			<thead>
 				<tr>
 					<th></th>
-					<th style="width: 60px">Дата</th>
+					<th style="width: 60px">Date</th>
 					<th colspan="2">
-					<th>Матч</th>
+					<th>Game</th>
 					<th colspan="2">
 					<?
 					if ($user->isAdmin()):
 					?>
-						<th><a href="javascript:void(0)" class="more-controls" data-id="<?=$table_id?>">Управление</a></th>
+						<th><a href="javascript:void(0)" class="more-controls" data-id="<?=$table_id?>">Control</a></th>
 					<?
 					else:
 					?>
@@ -58,9 +58,9 @@ class Html
 
 						$title = '';
 						if ($game['finished'] == 'Y' && strlen($game['result']) > 0)
-							$title = 'Матч завершен';
+							$title = 'Game is over';
 						else if ($game['finished'] == 'Y')
-							$title = 'Прогнозы больше не принимаются';
+							$title = 'Forecasts are not accepted anymore';
 
 						$hasPrognoses = (!empty($prognoses) && array_key_exists($game['id'], $prognoses) && !empty($prognoses[$game['id']])) ? true : false;
 
@@ -109,7 +109,7 @@ class Html
 							<td class="team">
 								<div class="team1">
 									<img src="/img/teams/<?=$game['team1_prefix']?>.png" />&nbsp;&nbsp;
-									<span class="with_hint" title="<?=$game['team1_fifa_rating']?> место в рейтинге FIFA">
+									<span class="with_hint" title="<?=$game['team1_fifa_rating']?> place in FIFA rating">
 										<?=$game["team1_name"]?>
 									</span>
 								</div>
@@ -142,7 +142,7 @@ class Html
 							<td class="team">
 								<div class="team2">
 									<img src="/img/teams/<?=$game['team2_prefix']?>.png" />&nbsp;&nbsp;
-									<span class="with_hint" title="<?=$game['team2_fifa_rating']?> место в рейтинге FIFA">
+									<span class="with_hint" title="<?=$game['team2_fifa_rating']?> place in FIFA rating">
 										<?=$game["team2_name"]?>
 									</span>
 								</div>
@@ -151,7 +151,7 @@ class Html
 							<td>
 								<?
 								if ($hasPrognoses && !$onlyMine):
-									$prognoses_title = ($game['finished'] == 'Y') ? 'Результаты' : 'Прогнозы';
+									$prognoses_title = ($game['finished'] == 'Y') ? 'Results' : 'Forecasts';
 								?>
 									<a href="javascript:void(0);" id="<?=$index?>_show_info" class="show_info dotted"><?=$prognoses_title?></a>&nbsp;
 								<?
@@ -163,15 +163,15 @@ class Html
 										<?
 										if ($game['finished'] != 'Y'):
 										?>
-										<a href="javascript:void(0);" data-game-id="<?=$game['id']?>" class="btn-sm btn-danger finish_button" title="Прекратить прием прогнозов">Стоп</a>
-										<a href="javascript:void(0);" data-game-id="<?=$game['id']?>" class="btn-sm btn-info random_button" title="Тупой бот">Т</a>
-										<a href="javascript:void(0);" data-game-id="<?=$game['id']?>" data-team1-rank="<?=$game['team1_rank']?>" data-team2-rank="<?=$game['team2_rank']?>" data-clever="Y" class="btn-sm btn-info random_button" title="Умный бот">У</a>
-										<a href="javascript:void(0);" data-game-id="<?=$game['id']?>" data-team1-fifa-rank="<?=$game['team1_fifa_rank']?>" data-team2-fifa-rank="<?=$game['team2_fifa_rank']?>" data-clever="Y" class="btn-sm btn-info random_button" title="Фифа-бот">F</a>
+										<a href="javascript:void(0);" data-game-id="<?=$game['id']?>" class="btn-sm btn-danger finish_button" title="Disallow forecasts">Stop</a>
+										<a href="javascript:void(0);" data-game-id="<?=$game['id']?>" class="btn-sm btn-info random_button" title="Stupid bot">Т</a>
+										<a href="javascript:void(0);" data-game-id="<?=$game['id']?>" data-team1-rank="<?=$game['team1_rank']?>" data-team2-rank="<?=$game['team2_rank']?>" data-clever="Y" class="btn-sm btn-info random_button" title="Smart bot">У</a>
+										<a href="javascript:void(0);" data-game-id="<?=$game['id']?>" data-team1-fifa-rank="<?=$game['team1_fifa_rank']?>" data-team2-fifa-rank="<?=$game['team2_fifa_rank']?>" data-clever="Y" class="btn-sm btn-info random_button" title="Fifa-bot">F</a>
 										<?
 										else:
 										?>
-										<a href="javascript:void(0);" data-game-id="<?=$game['id']?>" class="btn-sm btn-success continue_button" title="Разрешить прием прогнозов">Разрешить прием</a>
-										<a href="javascript:void(0);" data-result="<?=$game['result']?>" data-game-id="<?=$game['id']?>" class="btn-sm result_button">Счет</a>
+										<a href="javascript:void(0);" data-game-id="<?=$game['id']?>" class="btn-sm btn-success continue_button" title="Allow forecasts">Allow forecasts</a>
+										<a href="javascript:void(0);" data-result="<?=$game['result']?>" data-game-id="<?=$game['id']?>" class="btn-sm result_button">Score</a>
 										<?
 										endif;
 										?>
@@ -187,7 +187,7 @@ class Html
 									<?
 									if ($game['finished'] == 'Y'):
 									?>
-										<a href="javascript:void(0);" data-result="<?=$game['result']?>" data-game-id="<?=$game['id']?>" class="btn-sm result_button">Счет</a>
+										<a href="javascript:void(0);" data-result="<?=$game['result']?>" data-game-id="<?=$game['id']?>" class="btn-sm result_button">Score</a>
 									<?
 									endif;
 									?>
@@ -226,7 +226,7 @@ class Html
 													if ($game['finished'] == 'Y'):
 														$tmp_result['html'] = "<strong>".Y::getUserName($gp['user_id'], $gp['name'])."</strong>&nbsp;".$gp1."&nbsp;:&nbsp;".$gp2.$pointsHTML."<br>";
 													else:
-														$tmp_result['html'] = "<strong>".Y::getUserName($gp['user_id'], $gp['name'])."</strong>&nbsp;сделал прогноз<br>";
+														$tmp_result['html'] = "<strong>".Y::getUserName($gp['user_id'], $gp['name'])."</strong>&nbsp;made forecast<br>";
 													endif;
 
 													$tmp_result['name'] = $gp['name'];
@@ -374,11 +374,11 @@ class Html
 						$ratings[$gp['user_id']]['pdd_points'] += $pdd_points;
 
 						// hints
-						$ratings[$gp['user_id']][$game['id']]['points_text'] = $new_points.' '.Y::pl($new_points, 'очко', 'очка', 'очков');
-						$ratings[$gp['user_id']][$game['id']]['diff_points_text'] = $points.' '.Y::pl($points, 'очко', 'очка', 'очков');
-						$ratings[$gp['user_id']][$game['id']]['old_points_text'] = $old_points.' '.Y::pl($old_points, 'очко', 'очка', 'очков');
-						$ratings[$gp['user_id']][$game['id']]['kulichki_points_text'] = $kulichki_points.' '.Y::pl($kulichki_points, 'очко', 'очка', 'очков');
-						$ratings[$gp['user_id']][$game['id']]['pdd_points_text'] = $pdd_points.' '.Y::pl($pdd_points, 'очко', 'очка', 'очков');
+						$ratings[$gp['user_id']][$game['id']]['points_text'] = $new_points.' '.Y::pl($new_points, 'points', 'points', 'points');
+						$ratings[$gp['user_id']][$game['id']]['diff_points_text'] = $points.' '.Y::pl($points, 'points', 'points', 'points');
+						$ratings[$gp['user_id']][$game['id']]['old_points_text'] = $old_points.' '.Y::pl($old_points, 'points', 'points', 'points');
+						$ratings[$gp['user_id']][$game['id']]['kulichki_points_text'] = $kulichki_points.' '.Y::pl($kulichki_points, 'points', 'points', 'points');
+						$ratings[$gp['user_id']][$game['id']]['pdd_points_text'] = $pdd_points.' '.Y::pl($pdd_points, 'points', 'points', 'points');
 					}
 
 					if (!in_array($gp['user_id'], $users)){
@@ -396,7 +396,7 @@ class Html
 		// print_r($ratings);
 		unset($data);
 
-		$hint_4321 = "4 очка за угаданный счет<br>3 очка за угаданный исход и разницу мячей<br>2 очка за угаданный исход и отличие в разнице мячей < 1.5 мяча<br>1 очко за угаданный исход и отличие в разнице мячей > 1.5 мяча<br><br>Наведите курсор на число, чтобы увидеть расшифровку за каждый матч";
+		$hint_4321 = "4 очка за угаданный счет<br>3 очка за угаданный исход и разницу мячей<br>2 очка за угаданный исход и отличие в разнице мячей < 1.5 мяча<br>1 очко за угаданный исход и отличие в разнице мячей > 1.5 мяча<br><br>Hover over the number to see the components for each game points";
 		$hint_percent = "Процент от возможного количества очков за прошедшие матчи<br><br>Наведите курсор на число, чтобы увидеть расшифровку";
 		$hint_321 = "3 очка за угаданный счет<br>2 за разницу<br>1 очко за исход (победа, ничья)<br><br>Наведите курсор на число, чтобы увидеть расшифровку за каждый матч";
 		$hint_diff = "По формуле ".Calc::TOTAL." - (| Голы 1-й команды - Прогноз на голы 1-й команды | + | Голы 2-й команды - Прогноз на голы 2-й команды |)<br><br>Наведите курсор на число, чтобы увидеть расшифровку за каждый матч";
@@ -406,20 +406,20 @@ class Html
 
 		<table id="<?=$table_id?>" class="table table-striped" style="max-width: 1100px">
 			<thead>
-				<th><strong>Место</strong></th>
-				<th><strong>Пользователь</strong></th>
-				<th class="hinted" title="<?=$hint_4321?>"><strong>Очки</strong>&nbsp;<sup class="hint" title="<?=$hint_4321?>">*</sup></th>
-				<th><strong>Среднее отклонение (мячей)</strong></th>
+				<th><strong>Place</strong></th>
+				<th><strong>User</strong></th>
+				<th class="hinted" title="<?=$hint_4321?>"><strong>Points</strong>&nbsp;<sup class="hint" title="<?=$hint_4321?>">*</sup></th>
+				<th><strong>Average deviation (goals)</strong></th>
 				<th class="hinted" title="<?=$hint_percent?>"><strong>%</strong><sup class="hint" title="<?=$hint_percent?>">*</sup></th>
-				<th><strong>Точные прогнозы</strong></th>
-				<th><strong>Ошибки на&nbsp;1&nbsp;гол</strong></th>
+				<th><strong>Exact forecasts</strong></th>
+				<th><strong>1-goal errors</strong></th>
 
-				<th><strong>Угаданные исходы</strong></th>
-				<th class="hinted" title="<?=$hint_diff?>"><strong>Очки по схеме с разницей мячей</strong>&nbsp;<sup class="hint" title="<?=$hint_diff?>">*</sup></th>
-				<th class="hinted" title="<?=$hint_321?>"><strong>Очки по схеме 3-2-1</strong>&nbsp;<sup class="hint" title="<?=$hint_321?>">*</sup></th>
-				<th class="hinted" title="<?=$hint_kulichki?>"><strong>Очки по схеме с куличек</strong>&nbsp;<sup class="hint" title="<?=$hint_kulichki?>">*</sup></th>
-				<th class="hinted" title="<?=$hint_522?>"><strong>Очки по схеме 5-2-2</strong>&nbsp;<sup class="hint" title="<?=$hint_522?>">*</sup></th>
-				<th><strong>Всего прогнозов</strong></th>
+				<th><strong>Correct outcomes</strong></th>
+				<th class="hinted" title="<?=$hint_diff?>"><strong>Points for the goal difference scheme</strong>&nbsp;<sup class="hint" title="<?=$hint_diff?>">*</sup></th>
+				<th class="hinted" title="<?=$hint_321?>"><strong>Points for scheme 3-2-1</strong>&nbsp;<sup class="hint" title="<?=$hint_321?>">*</sup></th>
+				<th class="hinted" title="<?=$hint_kulichki?>"><strong>Points for 'kulichki.net' scheme</strong>&nbsp;<sup class="hint" title="<?=$hint_kulichki?>">*</sup></th>
+				<th class="hinted" title="<?=$hint_522?>"><strong>Points for scheme 5-2-2</strong>&nbsp;<sup class="hint" title="<?=$hint_522?>">*</sup></th>
+				<th><strong>Total forecasts</strong></th>
 			</thead>
 
 			<tbody>
@@ -593,8 +593,8 @@ class Html
 		?>
 		<table id="<?=$table_id?>" class="table table-striped" style="max-width: 1100px">
 			<thead>
-				<th><strong>Место</strong></th>
-				<th><strong>Пользователь</strong></th>
+				<th><strong>Place</strong></th>
+				<th><strong>User</strong></th>
 				<?
 				foreach ($game_ids as $game_id):
 				?>
@@ -1237,9 +1237,9 @@ class Html
 		?>
 			<table id="list" class="table table-striped" style="max-width: 600px">
 				<thead>
-					<th><strong>Пользователь</strong></th>
-					<th><strong>Матч</strong></th>
-					<th><strong>Сделан</strong></th>
+					<th><strong>User</strong></th>
+					<th><strong>Game</strong></th>
+					<th><strong>When</strong></th>
 				</thead>
 				<tbody>
 					<? foreach ($list as $prognosis): ?>

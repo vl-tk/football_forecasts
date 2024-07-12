@@ -18,7 +18,7 @@ define("VOID", 'VOID');
 
 $user_id = $user->getId();
 
-Log::write('Просмотр графика - Пользователь '.$user->getLogin());
+Log::write('Viewing graph - User '.$user->getLogin());
 
 $games = Game::getInfoFilteredByUser($user_id, $tournament_id);
 $prognoses = Prognosis::getFilteredForGroup($tournament_id, $user_group);
