@@ -41,11 +41,11 @@ $userGroups = User::getGroups($user->getId());
 	if (false && $user_id == MSG_USER_ID && !file_exists($_SERVER['DOCUMENT_ROOT'].'/email_sent.txt')) {
 	?>
 		<div class="alert alert-info" style="width: 600px">
-			<p>Привет, это админ</p>
-			<p>Напиши, пожалуйста, от кого ты пришел на сайт</p>
+			<p>Hello, it's admin</p>
+			<p>Please, who did you come to the site from</p>
 			<form action="/" method="post">
 				<p><textarea name="response" style="width: 100%; padding: 5px; margin-top: 5px; border: solid 1px lightblue; height: 100px"></textarea>
-				<p><input type="submit" style="" value="Отправить" /></p>
+				<p><input type="submit" style="" value="Send" /></p>
 			</form>
 		</div>
 	<?
@@ -63,9 +63,9 @@ $userGroups = User::getGroups($user->getId());
 				<? if ($group['name'] == "all"): ?>
 
 					<? if ($user_group == null): ?>
-						<a class="group_plate current_user_group" href="/">Все пользователи</a>
+						<a class="group_plate current_user_group" href="/">All users</a>
 					<? else: ?>
-						<a class="group_plate" href="/">Все пользователи</a>
+						<a class="group_plate" href="/">All users</a>
 					<? endif ?>
 
 				<? else: ?>
@@ -83,32 +83,32 @@ $userGroups = User::getGroups($user->getId());
 			<div class="tabbable">
 
 				<ul class="nav nav-tabs">
-					<li class="<?=Y::is_active($current_tab, "first")?>"><a href="#s1" id="first" data-toggle="tab">Матчи</a></li>
-					<li class="<?=Y::is_active($current_tab, "diagram")?>"><a href="#s2" id="diagram" data-toggle="tab">Рейтинг</a></li>
-					<li class="<?=Y::is_active($current_tab, "playoff_matches")?>"><a href="#s6" id="playoff_matches" data-toggle="tab">Матчи плей-офф</a></li>
-					<li class="<?=Y::is_active($current_tab, "playoff_list")?>"><a href="#s5" id="playoff_list" data-toggle="tab">Рейтинг плей-офф</a></li>
+					<li class="<?=Y::is_active($current_tab, "first")?>"><a href="#s1" id="first" data-toggle="tab">Games</a></li>
+					<li class="<?=Y::is_active($current_tab, "diagram")?>"><a href="#s2" id="diagram" data-toggle="tab">Standings</a></li>
+					<li class="<?=Y::is_active($current_tab, "playoff_matches")?>"><a href="#s6" id="playoff_matches" data-toggle="tab">Play-off games</a></li>
+					<li class="<?=Y::is_active($current_tab, "playoff_list")?>"><a href="#s5" id="playoff_list" data-toggle="tab">Play-off standings</a></li>
 					<?php
 					/*
 					<!-- <li class=""><a href="#s7" id="playoff_list" data-toggle="tab">Групповой этап</a></li> -->
 					<!-- <li class=""><a href="#s8" id="playoff_list" data-toggle="tab">Сетка плей-офф</a></li> -->
 					*/
 					?>
-					<li class="<?=Y::is_active($current_tab, "list")?>"><a href="#s4" id="list" data-toggle="tab">Новые прогнозы</a></li>
+					<li class="<?=Y::is_active($current_tab, "list")?>"><a href="#s4" id="list" data-toggle="tab">Recent forecasts</a></li>
 					<?
 					if (false && $user->isAuthorized()){
 					?>
-						<li class="<?=Y::is_active($current_tab, "chat_tab")?>"><a href="#s7" id="chat_tab" data-toggle="tab">Обсуждение</a></li>
+						<li class="<?=Y::is_active($current_tab, "chat_tab")?>"><a href="#s7" id="chat_tab" data-toggle="tab">Discuss</a></li>
 					<?
 					}
 					?>
 					<?
 					if (false && $user->isAuthorized()){
 					?>
-						<li class="<?=Y::is_active($current_tab, "results")?>"><a href="#s9" id="results" data-toggle="tab">Итоги</a></li>
+						<li class="<?=Y::is_active($current_tab, "results")?>"><a href="#s9" id="results" data-toggle="tab">Results</a></li>
 					<?
 					}
 					?>
-					<li class="<?=Y::is_active($current_tab, "rules")?>"><a href="#s3" id="rules" data-toggle="tab">Правила</a></li>
+					<li class="<?=Y::is_active($current_tab, "rules")?>"><a href="#s3" id="rules" data-toggle="tab">Rules</a></li>
 				</ul>
 
 				<div class="tab-content">
@@ -117,7 +117,7 @@ $userGroups = User::getGroups($user->getId());
 						<?php echo Html::showGamesTable('games', $games, $prognoses); ?>
 					</div>
 
-					<!-- РЕЙТИНГ -->
+					<!-- STANDINGS -->
 
 					<div class="tab-pane <?=Y::is_active($current_tab, "diagram")?>" id="s2">
 						<?php echo Html::showRatingTable('rating', $games, $prognoses);	?>
@@ -127,7 +127,7 @@ $userGroups = User::getGroups($user->getId());
 						<?php echo Html::showGamesTable('playoff_games', $games, $prognoses, true); ?>
 					</div>
 
-					<!-- РЕЙТИНГ ПЛЕЙ-ОФФ-->
+					<!-- PLAY-OFF STANDINGS -->
 
 					<div class="tab-pane <?=Y::is_active($current_tab, "playoff_list")?>" id="s5">
 						<?php echo Html::showRatingTable('plrating', $games, $prognoses, true); ?>
